@@ -104,7 +104,7 @@ case class ObjectStore(val store: Map[ObjectId, TRealObject]) {
     def newObject(id: ObjectId, ocs: Option[ClassSymbol]) : TRealObject = ocs match {
         case Some(cs) =>
             // construct a default object for this class
-            new TRealObject(Map[String,Type]() ++ cs.properties.mapValues[Type] { x => x.typ }, TUninitialized, true, TClass(cs))
+            new TRealObject(Map[String,Type]() ++ cs.propertiesRecursive.mapValues[Type] { x => x.typ }, TUninitialized, true, TClass(cs))
         case None =>
             // No class => any object
             new TRealObject(Map[String,Type](), TUninitialized, true, TAnyClass)

@@ -390,7 +390,7 @@ case class TypeTransferFunction(silent: Boolean,
                 val newObject = ocs match {
                     case Some(cs) =>
                         // construct a default object for this class, inline its constructor if any
-                        val ro = new TRealObject(Map[String,Type]() ++ cs.properties.mapValues[Type] { x => x.typ }, TUninitialized, true, TClass(cs))
+                        val ro = new TRealObject(Map[String,Type]() ++ cs.propertiesRecursive.mapValues[Type] { x => x.typ }, TUninitialized, true, TClass(cs))
 
 
                         lookupConstructor(cs) match {

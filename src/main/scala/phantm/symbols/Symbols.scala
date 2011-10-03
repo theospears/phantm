@@ -419,6 +419,11 @@ class ClassSymbol(val name: String, val parent: Option[ClassSymbol], var ifaces:
   def getProperties: List[PropertySymbol] = properties map { x => x._2 } toList
   def getStaticProperties: List[PropertySymbol] = static_properties map { x => x._2 } toList
 
+	def propertiesRecursive: HashMap[String,PropertySymbol] = parent match {
+		case Some(pcs) => pcs.propertiesRecursive ++ properties
+		case None => properties
+	}
+
 }
 
 class ConstantSymbol(val name: String, val value: Option[Scalar]) extends Symbol with TypeAnnotation
