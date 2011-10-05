@@ -75,6 +75,9 @@ case class TypeFlowAnalyzer(cfg: ControlFlowGraph,
                 } else {
                     injectPredef("this", thisObj.get)
                 }
+
+								// Set the environment scope so permissions are correct
+								baseEnv = baseEnv.setScope(ms.cs)
             case _ =>
         }
 

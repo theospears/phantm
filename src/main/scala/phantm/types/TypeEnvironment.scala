@@ -33,6 +33,10 @@ class TypeEnvironment(val map: Map[SimpleVariable, Type], val scope: Option[Clas
         new TypeEnvironment(map, scope, store.set(id, ot))
     }
 
+		def setScope(sc: ClassSymbol) = {
+			new TypeEnvironment(map, Some(sc), store)
+		}
+
     def initObjectIfNotExist(id: ObjectId, cl: Option[ClassSymbol]) = {
         new TypeEnvironment(map, scope, store.initIfNotExist(id, cl))
     }
